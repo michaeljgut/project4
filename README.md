@@ -1,6 +1,6 @@
 # project4
 
-This project is a Web Application that let's users search the NY Times for articles based on keyword or section topic. Articles may be saved. It uses React for the front end and rails for the backend. React was chosen for it's loading speed and Rails was chosen for it's speed.
+This project is a Web Application that let's users search the NY Times for articles based on keyword or section topic. Articles may be saved. It uses React for the front end and Rails for the backend. React was chosen for it's loading speed and Rails was chosen for it's speed.
 
 Here's a link to my wireframes: https://drive.google.com/file/d/0B24HDSb--6XOMVJsZTloSmFFQkk/view?usp=sharing
 
