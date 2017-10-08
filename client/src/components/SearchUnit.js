@@ -16,12 +16,12 @@ class SearchUnit extends Component {
   }
 
   handleChange(event) {
-    this.setState({value: event.target.value});
+    this.setState({topic: event.target.value});
   }
 
   handleSubmit(event) {
-    alert('Your favorite flavor is: ' + this.state.value);
     event.preventDefault();
+    this.getAPIData(event);
   }
 
   componentDidMount() {
@@ -31,7 +31,7 @@ class SearchUnit extends Component {
   getAPIData(e) {
     e.preventDefault();
     let getQuery = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=' +
-      process.env.REACT_APP_ARTICLES_API_KEY
+      process.env.REACT_APP_ARTICLES_API_KEY + '?q=' + this.state.query
     axios
       .get(getQuery)
       .then(res => {
