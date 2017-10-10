@@ -3,25 +3,22 @@
 }
 
 .search1 {
+  padding-left:0em;
   width: 500;
-  float: left;
-}
+/*  float: left;
+*/}
 
 .search2 {
+  padding-right: 0em;
   width: 500;
-  float: right;
-}
-
-.search3 {
-  width: 500;
-  float: left;
-}
-
-.search4 {
-  width: 500;
-  float: right;
-}
+/*  float: right;
+*/}
 
 .article {
   padding: .5em;
+  list-style: none;
+}
+
+.more-articles-icon {
+  font-size: 1em;
 }
