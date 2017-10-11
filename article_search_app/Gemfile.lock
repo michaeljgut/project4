@@ -38,6 +38,8 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    addressable (2.5.2)
+      public_suffix (>= 2.0.2, < 4.0)
     arel (8.0.0)
     bcrypt (3.1.11)
     builder (3.2.3)
@@ -54,18 +56,16 @@ GEM
     devise_token_auth (0.1.42)
       devise (> 3.5.2, <= 4.3)
       rails (< 6)
-    dotenv (2.2.1)
-    dotenv-rails (2.2.1)
-      dotenv (= 2.2.1)
-      railties (>= 3.2, < 5.2)
     erubi (1.6.1)
     ffi (1.9.18)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     hashie (3.5.6)
-    httparty (0.15.6)
-      multi_xml (>= 0.5.2)
     i18n (0.8.6)
+    launchy (2.4.3)
+      addressable (~> 2.3)
+    letter_opener (1.4.1)
+      launchy (~> 2.2)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -81,7 +81,6 @@ GEM
     mime-types-data (3.2016.0521)
     mini_portile2 (2.3.0)
     minitest (5.10.3)
-    multi_xml (0.6.0)
     nio4r (2.1.0)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
@@ -90,8 +89,10 @@ GEM
       rack (>= 1.6.2, < 3)
     orm_adapter (0.5.0)
     pg (0.21.0)
+    public_suffix (3.0.0)
     puma (3.10.0)
     rack (2.0.3)
+    rack-cors (1.0.1)
     rack-test (0.7.0)
       rack (>= 1.0, < 3)
     rails (5.1.4)
@@ -155,16 +156,15 @@ DEPENDENCIES
   cors (~> 1.0)
   devise
   devise_token_auth
-  dotenv-rails
-  httparty
+  letter_opener
   listen (>= 3.0.5, < 3.2)
   omniauth
   pg (~> 0.18)
   puma (~> 3.7)
+  rack-cors
   rails (~> 5.1.4)
   spring
   spring-watcher-listen (~> 2.0.0)
-  sprockets
   tzinfo-data
 
 BUNDLED WITH

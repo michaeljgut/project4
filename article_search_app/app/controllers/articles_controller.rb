@@ -7,8 +7,8 @@ class ArticlesController < ApplicationController
   def create
       article = Article.create(
           title: params[:title],
-          body: params[:body]
-          )
+          url: params[:url]
+      )
       render json: { article: article }
   end
 end

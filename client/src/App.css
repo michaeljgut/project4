@@ -5,14 +5,14 @@
 .search1 {
   padding-left:0em;
   width: 500;
-/*  float: left;
-*/}
+  float: left;
+}
 
 .search2 {
   padding-right: 0em;
   width: 500;
-/*  float: right;
-*/}
+  float: right;
+}
 
 .article {
   padding: .5em;
@@ -21,4 +21,8 @@
 
 .more-articles-icon {
   font-size: 1em;
+}
+
+.search-unit {
+  max-width: 35em;
 }

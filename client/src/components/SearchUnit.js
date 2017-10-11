@@ -34,7 +34,7 @@ class SearchUnit extends Component {
       this.getAPITopData();
     } else {
       this.getAPIArticleData();
-//      this.setState({query: ''});
+      this.setState({query: ''});
     }
   }
 
@@ -107,8 +107,8 @@ class SearchUnit extends Component {
 
   render(){
     return (
-      <div>
-        <h2>Search News Stories</h2>
+      <div className="search-unit">
+        <h3>Search News Stories</h3>
         <div className="get-articles">
           <form onSubmit={this.handleSubmit}>
             <label>
