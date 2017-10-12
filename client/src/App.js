@@ -29,20 +29,22 @@ class App extends Component {
   searchUnits() {
     let returnArray = [];
     for (let i=0; i<this.state.searchUnitCount; i++)
-      returnArray[i] = (<div><SearchUnit/></div>);
+      returnArray[i] = (<div><SearchUnit user_id={this.props.match.params.user_id}/></div>);
     return returnArray;
   }
 
   render() {
     return (
       <div className="App">
+        <Nav user_id={this.props.match.params.user_id}/>
         <h2>NY Times Article Search Application</h2>
-        <Nav />
         <div className="search1">
-          <SearchUnit/><SearchUnit/>
+          <SearchUnit user_id={this.props.match.params.user_id}/>
+          <SearchUnit user_id={this.props.match.params.user_id}/>
         </div>
         <div className="search2">
-          <SearchUnit/><SearchUnit/>
+          <SearchUnit user_id={this.props.match.params.user_id}/>
+          <SearchUnit user_id={this.props.match.params.user_id}/>
         </div>
         {this.searchUnits()}
         <button onClick={this.addSearchUnit}>Add Another Search Unit</button>

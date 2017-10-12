@@ -6,12 +6,12 @@ import axios from 'axios';
 // Auth.configure({apiUrl: 'http://localhost:3000/'});
 import Auth from 'j-toker';
 
-class TopArticles extends Component {
+class QueryArticles extends Component {
 
   constructor(props){
     super(props);
-    this.handleClick = this.handleClick.bind(this);
     this.button = this.button.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   };
 
   button() {
@@ -27,9 +27,9 @@ class TopArticles extends Component {
     e.preventDefault();
     axios
       .post('/articles', {
-        title: this.props.article.title,
-        publication_date: this.props.article.published_date,
-        url: this.props.article.url,
+        title: this.props.article.headline.main,
+        publication_date: this.props.article.pub_date,
+        url: this.props.article.web_url,
         user_id: this.props.user_id,
       })
       .then(res => {
@@ -47,9 +47,9 @@ class TopArticles extends Component {
   render(){
     return (
       <div className="auth-page">
-        <li className="article" key={this.props.article.published_date}>
-          <a href={this.props.article.url}>{this.props.article.title}</a>
-          <span> - {this.props.article.published_date.substr(0,10)}</span>
+        <li className="article" key={this.props.article.pub_date}>
+          <a href={this.props.article.web_url}>{this.props.article.headline.main}</a>
+          <span> - {this.props.article.pub_date.substr(0,10)}</span>
           {this.button()}
         </li>
       </div>
@@ -58,4 +58,4 @@ class TopArticles extends Component {
 }
 
 
-export default TopArticles;
+export default QueryArticles;

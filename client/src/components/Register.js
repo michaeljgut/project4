@@ -32,6 +32,16 @@ class Register extends Component {
 
   handleFormSubmit(e){
     e.preventDefault();
+    if (this.state.password.length < 6) {
+      alert('Password must be at least 6 characters!');
+      return;
+    }
+    if (this.state.password !== this.state.passwordConfirmation) {
+      alert('Password does not equal confirmation!');
+      return;
+    }
+
+
     // Auth.configure({apiUrl: 'http://localhost:3000'})
     // console.log(Auth);
     // debugger
@@ -63,7 +73,7 @@ class Register extends Component {
 //              "confirm_success_url": 'http://localhost:3000/confirm_success'
     }
     console.log('fb = ',fb);
-    axios('http://localhost:3000/auth', {
+    axios('/auth', {
       method: 'POST',
       header: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       data: fb
@@ -100,7 +110,7 @@ class Register extends Component {
   }
 
   render(){
-    let path = '/articles/user/' + this.state.user_id;
+    let path = '/search/user/' + this.state.user_id;
     return (
       <div className="auth-page">
           <h1 className="auth-header">Register to save articles!</h1>

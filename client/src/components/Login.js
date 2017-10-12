@@ -49,7 +49,7 @@ class Login extends Component {
 
 
   render(){
-      let path = '/articles/user/' + this.state.user_id;
+    let path = '/search/user/' + this.state.user_id;
       console.log('path = ',path);
       return (
           <div className="auth-page">
@@ -64,7 +64,7 @@ class Login extends Component {
               <a className="link" href="/register">Register</a>
 
               {this.state.fireRedirect
-                  ? <Redirect push to={'/articles/user/' + this.state.user_id} />
+                  ? <Redirect push to={path} />
                     : ''}
           </div>
       )

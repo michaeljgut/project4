@@ -5,37 +5,48 @@ import axios from 'axios';
 //var Auth = require('j-toker');
 // Auth.configure({apiUrl: 'http://localhost:3000/'});
 import Auth from 'j-toker';
+import Nav from './Nav';
 
 class SavedArticles extends Component {
 
   constructor(props){
     super(props);
     this.state ={
-        user_id: '',
-        name: '',
-        email: '',
-        password: '',
-        passwordConfirmation: '',
-        fireRedirect: false
+      articles: []
     };
   }
 
+  componentDidMount() {
+    let path = '/articles/' + this.props.match.params.user_id;
+    axios
+      .get(path, {
+        user_id: this.props.match.params.user_id,
+      })
+      .then(res => {
+        console.log('--------------->', this.state)
+        let tempArray = res.data.slice();
+        console.log(tempArray[0]);
+        this.setState({articles: tempArray});
+        // this.setState({
+        //   newId: res.data.data.id,
+        //   fireRedirect: true
+        // });
+      })
+      .catch(err => console.log('in error',err));
+  }
+
+  listArticles() {
+    return this.state.articles.map(item => {
+      return <li><a href={item.url}>{item.title}</a>- {item.publication_date}</li>
+    })
+  }
+
   render(){
-    let path = '/articles/user/' + this.state.user_id;
     return (
       <div className="auth-page">
-          <h1 className="auth-header">Saved Articles</h1>
-          <form onSubmit={(e) => this.handleFormSubmit(e)}>
-              <input name="name" type="text" placeholder="Name" required autoFocus onChange={this.handleInputChange}/>
-              <input name="email" type="text" placeholder="Email" required onChange={this.handleInputChange}/>
-              <input name="password" type="password" placeholder="Password" required onChange={this.handleInputChange}/>
-              <input name="passwordConfirmation" type="password" placeholder="Password Confirmation" required onChange={this.handleInputChange}/>
-              <input className='submit' type="submit" value="SIGN UP" />
-          </form>
-          <a className="link" href="/login">Login</a>
-          {this.state.fireRedirect
-              ? <Redirect push to={path} />
-              : ''}
+        <Nav />
+        <h1 className="auth-header">Saved Articles</h1>
+        {this.listArticles()}
       </div>
     )
   }

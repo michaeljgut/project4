@@ -24,9 +24,11 @@ export default (
             <Route exact path='/home' component={App} />
             <Route exact path='/' component={App} />
             <Route exact path='/articles/user/:user_id' component={SavedArticles} />
+            <Route exact path='/search/user/:user_id' component={App} />
             <Route exact path='/login' component={Login} />
             <Route exact path='/logout' component={Login} />
             <Route exact path='/register' component={Register} />
+            <Route exact path='/saved_articles/:user_id' component={SavedArticles} />
         </div>
     </BrowserRouter>
 )

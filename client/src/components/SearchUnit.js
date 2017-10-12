@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import TopArticles from './TopArticles';
+import QueryArticles from './QueryArticles';
 
 class SearchUnit extends Component {
   constructor() {
@@ -53,23 +54,21 @@ class SearchUnit extends Component {
     // let proxyUrl = 'https://cors-anywhere.herokuapp.com/';
     axios.get(getQuery)
       .then(res => {
-        console.log('--------------->', this.state)
-        console.log('res = ',res)
+        console.log('--------------->', this.state);
+        console.log('res = ',res);
+        console.log('this.props = ',this.props);
         if (this.state.query === '') {
           articleArray = res.data.results.map((item,index) => {
-            return <TopArticles article={item} />;
+            return <TopArticles article={item} user_id={this.props.user_id}/>;
           });
         } else {
           let resultArray = res.data.response.docs.filter(item =>
             item.document_type === 'article' || item.document_type === 'blogpost');
           articleArray = resultArray.map((item,index) => {
-            return (<li className="article" key={item.pub_date}>
-                      <a href={item.web_url}>{item.headline.main}</a>
-                      <span> - {item.pub_date.substr(0,10)}</span>
-                    </li>
-                    )
+            return <QueryArticles article={item} user_id={this.props.user_id} />;
           });
           this.setState({query: ''});
+          console.log('resultArray = ',resultArray);
         }
         this.setState({
           articles_loaded: true,

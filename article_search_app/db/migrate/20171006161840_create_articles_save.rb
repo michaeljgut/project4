@@ -2,9 +2,9 @@ class CreateArticles < ActiveRecord::Migration[5.1]
   def change
     create_table :articles do |t|
       t.string :title
-      t.string :author
       t.date :publication_date
-      t.string :url
+      t.string :url, unique: true
+      t.integer :user_id
 
       t.timestamps
     end
