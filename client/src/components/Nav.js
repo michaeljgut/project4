@@ -32,25 +32,20 @@ class Nav extends React.Component {
 
     return (
       <div>
-            <div onClick={this.toggle.bind(this)}>
-                <div className='nav'>
-                        <div className="hamburger-nav-icon"></div>
-                        <div className="hamburger-nav-icon"></div>
-                        <div className="hamburger-nav-icon"></div>
-                </div>
-
-            </div>
-
+        <div onClick={this.toggle.bind(this)}>
+          <div className='nav'>
+            <div className="hamburger-nav-icon"></div>
+            <div className="hamburger-nav-icon"></div>
+            <div className="hamburger-nav-icon"></div>
+          </div>
+        </div>
         <div className='nav-icon' style={ shown }>
-                    <div className='nav-list'>
-                        <a href = '/login' className='nav-link'>Login/Logout</a>
-                        <a href = '/register' className='nav-link'>Register</a>
-                        <a href='/articles' className='nav-link'>Saved Articles</a>
-
-
-                    </div>
-
-                </div>
+          <div className='nav-list'>
+            <a href = '/login' className='nav-link'>Login/Logout</a>
+            <a href = '/register' className='nav-link'>Register</a>
+            <a href='/articles' className='nav-link'>Saved Articles</a>
+          </div>
+        </div>
         <h2 style={ hidden }></h2>
       </div>
     )
@@ -58,3 +53,19 @@ class Nav extends React.Component {
 }
 
 export default Nav;
+
+        // <div onClick={this.toggle.bind(this)}>
+        //   <div className='nav'>
+        //     <div className="hamburger-nav-icon"></div>
+        //     <div className="hamburger-nav-icon"></div>
+        //     <div className="hamburger-nav-icon"></div>
+        //   </div>
+        // </div>
+        // <div className='nav-icon' style={ shown }>
+        //   <div className='nav-list'>
+        //       <a href = '/login' className='nav-link'>Login/Logout</a>
+        //       <a href = '/register' className='nav-link'>Register</a>
+        //       <a href='/articles' className='nav-link'>Saved Articles</a>
+        //   </div>
+        // </div>
+        // <h2 style={ hidden }></h2>

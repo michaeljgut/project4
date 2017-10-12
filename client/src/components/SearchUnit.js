@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
+import TopArticles from './TopArticles';
 
 class SearchUnit extends Component {
   constructor() {
@@ -11,7 +12,7 @@ class SearchUnit extends Component {
       articles: [],
       more_articles: false,
     };
-    this.getAPIArticleData = this.getAPIArticleData.bind(this);
+    // this.getAPIData = this.getAPIData.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,60 +31,46 @@ class SearchUnit extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    if (this.state.query === '') {
-      this.getAPITopData();
-    } else {
-      this.getAPIArticleData();
-      this.setState({query: ''});
-    }
+    this.getAPIData();
   }
 
   componentDidMount() {
     // this.getAPITopData();
   }
 
-  getAPIArticleData() {
+  getAPIData() {
+    let apiKey = 'api-key=' + process.env.REACT_APP_ARTICLES_API_KEY
+    let getQuery = '';
+    let articleArray = [];
+    if (this.state.query === '') {
+      getQuery = 'http://api.nytimes.com/svc/topstories/v2/' +
+        this.state.topic + '.json?' + apiKey;
+    } else {
+      getQuery = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?q=' + this.state.query +
+        '&' + apiKey;
+    }
+    console.log('getQuery = ', getQuery);
     // let proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    let getQuery = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?q=' + this.state.query +
-      '&api-key=' + process.env.REACT_APP_ARTICLES_API_KEY;
     axios.get(getQuery)
       .then(res => {
         console.log('--------------->', this.state)
         console.log('res = ',res)
-        console.log('res.data.response.docs = ',res.data.response.docs);
-        let resultArray = res.data.response.docs.filter(item =>
-          item.document_type === 'article' || item.document_type === 'blogpost');
-        let articleArray = resultArray.map((item,index) => {
-          return (<li className="article" key={item.pub_date}>
-                    <a href={item.web_url}>{item.headline.main}</a>
-                    <span> - {item.pub_date.substr(0,10)}</span>
-                  </li>
-                  )
-        });
-        this.setState({
-          articles_loaded: true,
-          articles: articleArray,
-          displayArticles: true,
-        });
-      })
-      .catch(err => console.log(err));
-  }
-
-  getAPITopData() {
-    let getQuery2 = 'http://api.nytimes.com/svc/topstories/v2/' +
-      this.state.topic + '.json?api-key=' + process.env.REACT_APP_ARTICLES_API_KEY
-    axios.get(getQuery2)
-      .then(res => {
-        console.log('--------------->', this.state)
-        console.log('res = ',res)
-        console.log('res.data.results = ',res.data.results);
-        let articleArray = res.data.results.map((item,index) => {
-          return (<li className="article" key={item.published_date}>
-                    <a href={item.url}>{item.title}</a>
-                    <span> - {item.published_date.substr(0,10)}</span>
-                  </li>
-                  )
-        });
+        if (this.state.query === '') {
+          articleArray = res.data.results.map((item,index) => {
+            return <TopArticles article={item} />;
+          });
+        } else {
+          let resultArray = res.data.response.docs.filter(item =>
+            item.document_type === 'article' || item.document_type === 'blogpost');
+          articleArray = resultArray.map((item,index) => {
+            return (<li className="article" key={item.pub_date}>
+                      <a href={item.web_url}>{item.headline.main}</a>
+                      <span> - {item.pub_date.substr(0,10)}</span>
+                    </li>
+                    )
+          });
+          this.setState({query: ''});
+        }
         this.setState({
           articles_loaded: true,
           articles: articleArray,

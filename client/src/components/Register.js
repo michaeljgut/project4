@@ -11,6 +11,7 @@ class Register extends Component {
   constructor(props){
     super(props);
     this.state ={
+        user_id: '',
         name: '',
         email: '',
         password: '',
@@ -69,11 +70,14 @@ class Register extends Component {
     })
     .then(res => {
       console.log(res)
+      this.setState({
+        user_id: res.data.data.id
+      })
     })
-    .then(json => {
-      console.log(json,'<-----')
-      console.log(document.cookie)
-    })
+    // .then(json => {
+    //   console.log(json,'<-----')
+    //   console.log(document.cookie)
+    // })
     .catch(err => console.log(err));
 //             axios('/auth', {
 //                 method: 'POST',

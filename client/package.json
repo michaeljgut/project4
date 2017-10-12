@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "cors": "^2.8.4",
+    "flexbox-react": "^4.4.0",
     "isomorphic-fetch": "^2.2.1",
     "j-toker": "0.0.10-beta3",
     "react": "^16.0.0",

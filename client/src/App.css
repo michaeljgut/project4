@@ -26,3 +26,94 @@
 .search-unit {
   max-width: 35em;
 }
+
+.hamburger-nav-icon{
+   width: 40px;
+   height: 2px;
+   background: #0F77FE;
+   margin: 1% 0;
+   display: block;
+}
+
+.nav-icon {
+  width: 50vw;
+  background:#0F77FE;
+  height: 50vh;
+  position: absolute;
+}
+
+.nav-list:after {
+  background-color: green;
+  width: 80vw;
+  transition: all 0.3s;
+
+
+}
+
+/* code source for nav animation: https://codepen.io/anon/pen/pWNZQz */
+
+div.nav-list a:before, div.nav-list a:after
+{
+    position: absolute;
+    opacity: 0;
+    font-size: 40px;
+    top: 0px;
+    transition: all 0.3s;
+}
+
+
+div.nav-list a:before
+{
+    content: '(';
+    left: -15px;
+    transform: translateX(20px);
+}
+
+div.nav-list a:after
+{
+    content: ')';
+    right: -15px;
+    transform: translateX(-40px);
+}
+
+div.nav-list a:hover:before, div.nav-list a:hover:after{
+    opacity: 1;
+    transform: translateX(0px);
+}
+
+.nav{
+  height: 52px;
+  border-left: 20px solid transparent;
+}
+
+
+.nav-link {
+  color: #FFF;
+  text-decoration: none;
+  font-family: 'Nunito', sans-serif;
+  font-size: 2em;
+  font-weight: 100;
+  margin: 0px 10px;
+  padding: 10px 10px;
+  position: relative;
+  z-index: 0;
+  cursor: pointer;
+}
+
+/******************************************
+/* HELPER CLASSES
+/*******************************************/
+/* Clearfix */
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table; }
+
+.clearfix:after {
+  clear: both; }
+
+.is-hidden {
+  display: none; }
+
+.is-visible {
+  display: block; }

@@ -6,6 +6,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import Login from './components/Login.js'
 import Register from './components/Register.js'
+import SavedArticles from './components/SavedArticles.js'
 /*// import Logout from './components/Logout.js'
 
 // import FlashcardAddForm from './components/FlashcardAddForm.js'
@@ -22,6 +23,7 @@ export default (
         <div className='router'>
             <Route exact path='/home' component={App} />
             <Route exact path='/' component={App} />
+            <Route exact path='/articles/user/:user_id' component={SavedArticles} />
             <Route exact path='/login' component={Login} />
             <Route exact path='/logout' component={Login} />
             <Route exact path='/register' component={Register} />

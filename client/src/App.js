@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import SearchUnit from './components/SearchUnit';
-
+import Nav from './components/Nav';
 class App extends Component {
 
   constructor() {
@@ -37,6 +37,7 @@ class App extends Component {
     return (
       <div className="App">
         <h2>NY Times Article Search Application</h2>
+        <Nav />
         <div className="search1">
           <SearchUnit/><SearchUnit/>
         </div>

@@ -10,8 +10,8 @@ class Login extends Component {
   constructor(props){
     super(props);
     this.state ={
-        user_id: 0,
-        username: '',
+        user_id: '',
+        email: '',
         password: '',
         fireRedirect: false
     };
@@ -29,21 +29,19 @@ class Login extends Component {
 
   handleFormSubmit(e){
     e.preventDefault();
-    axios('/auth', {
+    axios('/auth/sign_in', {
         method: 'POST',
         data: {
-            username: this.state.username,
+            email: this.state.email,
             password: this.state.password,
         },
     })
     .then(res => {
-      if (res.data.auth) {
-        console.log('user = ', res.data.user);
-        this.setState({
-            user_id: res.data.user.id,
-            fireRedirect: true,
-        });
-      }
+      console.log('res.data.data = ',res.data.data);
+      this.setState({
+          user_id: res.data.data.id,
+          fireRedirect: true,
+      });
     })
     .catch(err => console.log('in error',err));
     e.target.reset();
@@ -52,22 +50,21 @@ class Login extends Component {
 
   render(){
       let path = '/articles/user/' + this.state.user_id;
-      console.log('params = ',this.state.user_id)
       console.log('path = ',path);
       return (
           <div className="auth-page">
 
-              <h1 className="auth-header">Sign in to save articles and see your saved articles.</h1>
+              <h1 className="auth-header">Sign In To Save Articles!</h1>
 
               <form onSubmit={(e) => this.handleFormSubmit(e)}>
-                  <input name="username" type="text" placeholder="username" required onChange={this.handleInputChange}/>
+                  <input name="email" type="text" placeholder="email" required autoFocus onChange={this.handleInputChange}/>
                   <input name="password" type="password" placeholder="password" required onChange={this.handleInputChange}/>
                   <input className="submit" type="submit" value="LOGIN" />
               </form>
               <a className="link" href="/register">Register</a>
 
               {this.state.fireRedirect
-                  ? <Redirect push to={path} />
+                  ? <Redirect push to={'/articles/user/' + this.state.user_id} />
                     : ''}
           </div>
       )
