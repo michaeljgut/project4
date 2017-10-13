@@ -34,8 +34,7 @@ class Nav extends React.Component {
     let savedPath = '/saved_articles/' + this.props.user_id;
 
     let content = '';
-    console.log('user id = ',this.props.user_id);
-    if (this.props.user_id !== '')
+    if (Number(this.props.user_id) > 0)
       content = (
         <div className='nav-line'>
         <a href = '/' className='nav-link2'>Logout</a>

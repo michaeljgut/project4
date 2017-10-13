@@ -5,6 +5,7 @@ import axios from 'axios';
 //var Auth = require('j-toker');
 // Auth.configure({apiUrl: 'http://localhost:3000/'});
 import Auth from 'j-toker';
+import cookies from 'cookies-js';
 
 class TopArticles extends Component {
 
@@ -25,13 +26,40 @@ class TopArticles extends Component {
 
   handleClick(e) {
     e.preventDefault();
+   let headers = {
+     'access-token': cookies.get('access-token'),
+     'client': cookies.get('client'),
+     'token-type': cookies.get('token-type'),
+     'uid': cookies.get('uid'),
+     'expiry': cookies.get('expiry')
+   };
+//    console.log('headers = ',headers)
+//     let path = `/articles?user_id=${this.props.match.params.user_id}`;
+//     axios
+//       .get(path,
+//      { headers: headers })
+// //        user_id: this.props.match.params.user_id,
+//       .then(res => {
+//         console.log('--------------->', this.state)
+//         let tempArray = res.data.slice();
+//         console.log(tempArray[0]);
+//         this.setState({articles: tempArray});
+//         // this.setState({
+//         //   newId: res.data.data.id,
+//         //   fireRedirect: true
+//         // });
+//       })
+//       .catch(err => console.log('in error',err));
+//   }
+
     axios
       .post('/articles', {
         title: this.props.article.title,
         publication_date: this.props.article.published_date,
         url: this.props.article.url,
         user_id: this.props.user_id,
-      })
+      }, {        headers: headers,
+})
       .then(res => {
         console.log('--------------->', this.state)
         console.log(res);

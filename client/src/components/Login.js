@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Auth from 'j-toker'
+import Nav from './Nav';
+import cookies from 'cookies-js';
 //var Auth = require('j-toker');
 Auth.configure({apiUrl: '/'});
 
@@ -37,7 +39,14 @@ class Login extends Component {
         },
     })
     .then(res => {
-      console.log('res.data.data = ',res.data.data);
+      console.log('res.headers = ',res.headers);
+//      console.log('res.data.data = ',res.data.data);
+       //setting cookies here
+       cookies.set('access-token', res.headers["access-token"]);
+       cookies.set('client', res.headers["client"]);
+       cookies.set('token-type', res.headers["token-type"]);
+       cookies.set('uid', res.headers["uid"]);
+       cookies.set('expiry', res.headers["expiry"]);
       this.setState({
           user_id: res.data.data.id,
           fireRedirect: true,
@@ -54,14 +63,15 @@ class Login extends Component {
       return (
           <div className="auth-page">
 
-              <h1 className="auth-header">Sign In To Save Articles!</h1>
-
+              <h2 className="auth-header">Sign In To Save Articles!</h2>
+              <h2></h2>
+              <Nav user_id={this.props.match.params.user_id}/>
+              <br/>
               <form onSubmit={(e) => this.handleFormSubmit(e)}>
                   <input name="email" type="text" placeholder="email" required autoFocus onChange={this.handleInputChange}/>
                   <input name="password" type="password" placeholder="password" required onChange={this.handleInputChange}/>
                   <input className="submit" type="submit" value="LOGIN" />
               </form>
-              <a className="link" href="/register">Register</a>
 
               {this.state.fireRedirect
                   ? <Redirect push to={path} />

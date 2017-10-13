@@ -5,6 +5,7 @@ import axios from 'axios';
 //var Auth = require('j-toker');
 // Auth.configure({apiUrl: 'http://localhost:3000/'});
 import Auth from 'j-toker';
+import Nav from './Nav';
 
 class Register extends Component {
 
@@ -113,7 +114,9 @@ class Register extends Component {
     let path = '/search/user/' + this.state.user_id;
     return (
       <div className="auth-page">
-          <h1 className="auth-header">Register to save articles!</h1>
+          <h2 className="auth-header">Register to save articles!</h2>
+          <Nav user_id={this.props.match.params.user_id}/>
+          <h2></h2>
           <form onSubmit={(e) => this.handleFormSubmit(e)}>
               <input name="name" type="text" placeholder="Name" required autoFocus onChange={this.handleInputChange}/>
               <input name="email" type="text" placeholder="Email" required onChange={this.handleInputChange}/>

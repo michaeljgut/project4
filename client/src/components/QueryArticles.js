@@ -5,6 +5,7 @@ import axios from 'axios';
 //var Auth = require('j-toker');
 // Auth.configure({apiUrl: 'http://localhost:3000/'});
 import Auth from 'j-toker';
+import cookies from 'cookies-js';
 
 class QueryArticles extends Component {
 
@@ -25,13 +26,21 @@ class QueryArticles extends Component {
 
   handleClick(e) {
     e.preventDefault();
+   let headers = {
+     'access-token': cookies.get('access-token'),
+     'client': cookies.get('client'),
+     'token-type': cookies.get('token-type'),
+     'uid': cookies.get('uid'),
+     'expiry': cookies.get('expiry')
+   };
+   console.log('in query post ',headers);
     axios
       .post('/articles', {
         title: this.props.article.headline.main,
         publication_date: this.props.article.pub_date,
         url: this.props.article.web_url,
         user_id: this.props.user_id,
-      })
+      }, {headers: headers})
       .then(res => {
         console.log('--------------->', this.state)
         console.log(res);
