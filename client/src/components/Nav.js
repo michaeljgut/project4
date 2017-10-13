@@ -37,18 +37,18 @@ class Nav extends React.Component {
     if (Number(this.props.user_id) > 0)
       content = (
         <div className='nav-line'>
+        <a href = {path} className='nav-link2'>Home</a>
         <a href = '/' className='nav-link2'>Logout</a>
         <a href = '/register' className='nav-link2'>Register</a>
-        <a href = {path} className='nav-link2'>Home</a>
         <a href = {savedPath} className='nav-link2'>Saved Articles</a>
         </div>
       )
     else
       content = (
         <div className='nav-line'>
+          <a href = {path} className='nav-link2'>Home</a>
           <a href = '/login' className='nav-link2'>Login</a>
           <a href = '/register' className='nav-link2'>Register</a>
-          <a href = {path} className='nav-link2'>Home</a>
         </div>
       )
     return content;
