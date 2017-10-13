@@ -18,6 +18,7 @@ class SearchUnit extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.saveTopic = this.saveTopic.bind(this);
   }
 
   handleChange(event) {
