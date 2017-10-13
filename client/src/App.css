@@ -101,13 +101,15 @@ div.nav-list a:hover:before, div.nav-list a:hover:after{
 }
 
 .nav-link2 {
-  text-decoration: none;
+  padding-left: 1em;
+  padding-right: 1em;
   font-family: 'Nunito', sans-serif;
   font-size: 1em;
   font-weight: 100;
-  margin: 0px 10px;
-  padding: 10px 10px;
-  position: relative;
+}
+
+.nav-line {
+  text-align: left;
 }
 
 /******************************************

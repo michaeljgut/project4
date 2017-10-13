@@ -44,7 +44,7 @@ class SavedArticles extends Component {
   render(){
     return (
       <div className="auth-page">
-        <Nav />
+        <Nav user_id={this.props.match.params.user_id}/>
         <h1 className="auth-header">Saved Articles</h1>
         {this.listArticles()}
       </div>

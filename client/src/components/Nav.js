@@ -33,19 +33,26 @@ class Nav extends React.Component {
     let path = '/search/user/' + this.props.user_id;
     let savedPath = '/saved_articles/' + this.props.user_id;
 
-    return (
-      <div>
-        <div className='nav-icon2'>
-          <div className='nav-list2'>
-            <a href = '/login' className='nav-link2'>Login</a>
-            <a href = '/' className='nav-link2'>Logout</a>
-            <a href = '/register' className='nav-link2'>Register</a>
-            <a href = {path} className='nav-link2'>Home</a>
-            <a href = {savedPath} className='nav-link2'>Saved Articles</a>
-          </div>
+    let content = '';
+    console.log('user id = ',this.props.user_id);
+    if (this.props.user_id !== '')
+      content = (
+        <div className='nav-line'>
+        <a href = '/' className='nav-link2'>Logout</a>
+        <a href = '/register' className='nav-link2'>Register</a>
+        <a href = {path} className='nav-link2'>Home</a>
+        <a href = {savedPath} className='nav-link2'>Saved Articles</a>
         </div>
-      </div>
-    )
+      )
+    else
+      content = (
+        <div className='nav-line'>
+          <a href = '/login' className='nav-link2'>Login</a>
+          <a href = '/register' className='nav-link2'>Register</a>
+          <a href = {path} className='nav-link2'>Home</a>
+        </div>
+      )
+    return content;
   }
 }
 

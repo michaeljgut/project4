@@ -36,8 +36,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Nav user_id={this.props.match.params.user_id}/>
         <h2>NY Times Article Search Application</h2>
+        <Nav user_id={this.props.match.params.user_id}/>
         <div className="search1">
           <SearchUnit user_id={this.props.match.params.user_id}/>
           <SearchUnit user_id={this.props.match.params.user_id}/>
