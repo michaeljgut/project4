@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import TopArticles from './TopArticles';
 import QueryArticles from './QueryArticles';
+import cookies from 'cookies-js';
 
 class SearchUnit extends Component {
   constructor() {
@@ -46,9 +47,11 @@ class SearchUnit extends Component {
     if (this.state.query === '') {
       getQuery = 'http://api.nytimes.com/svc/topstories/v2/' +
         this.state.topic + '.json?' + apiKey;
+        this.query = this.state.topic;
     } else {
       getQuery = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?q=' + this.state.query +
         '&' + apiKey;
+        this.query = this.state.query;
     }
     console.log('getQuery = ', getQuery);
     // let proxyUrl = 'https://cors-anywhere.herokuapp.com/';
@@ -91,7 +94,37 @@ class SearchUnit extends Component {
       return '';
   }
 
-  render(){
+  saveTopic(e) {
+    e.preventDefault();
+   let headers = {
+     'access-token': cookies.get('access-token'),
+     'client': cookies.get('client'),
+     'token-type': cookies.get('token-type'),
+     'uid': cookies.get('uid'),
+     'expiry': cookies.get('expiry')
+   };
+   console.log('in query post ',headers);
+    axios
+      .post('/topics', {
+        name: this.query,
+        user_id: this.props.user_id,
+      }, {headers: headers})
+      .then(res => {
+        console.log('--------------->', this.state)
+        console.log(res);
+        // this.setState({
+        //   newId: res.data.data.id,
+        //   fireRedirect: true
+        // });
+      })
+      .catch(err => console.log(err));
+//    e.target.reset();
+  }
+
+
+
+
+  render() {
     return (
       <div className="search-unit">
         <h3>Search News Stories</h3>
@@ -108,6 +141,7 @@ class SearchUnit extends Component {
               onChange={this.handleChange}
               autoFocus
             />
+            <button onClick={this.saveTopic} >Save Topic</button>
             <br>
             </br>
             <label>
@@ -142,6 +176,7 @@ class SearchUnit extends Component {
               </select>
             </label>
               <input className='submit' type="submit" value="SUBMIT" />
+            }
           </form>
           {this.button()}
           <p>{this.state.articles.slice(0,this.state.more_articles ? 10 : 3)}</p>
