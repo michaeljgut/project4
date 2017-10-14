@@ -5,6 +5,7 @@ class ArticlesController < ApplicationController
   #     render json: @articles
   # end
   def create
+      puts 'params = ', params
       @article = Article.create(
           title: params[:title],
           url: params[:url],

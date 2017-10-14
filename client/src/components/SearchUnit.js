@@ -10,6 +10,7 @@ class SearchUnit extends Component {
     this.state = {
       query: '',
       topic: 'home',
+      query_topic: 'home',
       articles_loaded: false,
       articles: [],
       more_articles: false,
@@ -38,7 +39,12 @@ class SearchUnit extends Component {
   }
 
   componentDidMount() {
-    // this.getAPITopData();
+    let savedArticles = cookies.get(`saved-articles-${this.props.unit_no}`);
+    console.log(`saved-articles-${this.props.unit_no}`)
+    if (typeof(savedArticles) != 'undefined') {
+      console.log('savedArticles = ', savedArticles);
+      this.setState({articles: savedArticles})
+    }
   }
 
   getAPIData() {
@@ -48,11 +54,11 @@ class SearchUnit extends Component {
     if (this.state.query === '') {
       getQuery = 'http://api.nytimes.com/svc/topstories/v2/' +
         this.state.topic + '.json?' + apiKey;
-        this.query = this.state.topic;
+        this.setState({query_topic: this.state.topic});
     } else {
       getQuery = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?q=' + this.state.query +
         '&' + apiKey;
-        this.query = this.state.query;
+        this.setState({query_topic: this.state.query});
     }
     console.log('getQuery = ', getQuery);
     // let proxyUrl = 'https://cors-anywhere.herokuapp.com/';
@@ -74,6 +80,8 @@ class SearchUnit extends Component {
           this.setState({query: ''});
           console.log('resultArray = ',resultArray);
         }
+        console.log(articleArray[0]);
+        cookies.set(`saved-articles-${this.props.unit_no}`, articleArray[0].title);
         this.setState({
           articles_loaded: true,
           articles: articleArray,
@@ -105,9 +113,10 @@ class SearchUnit extends Component {
      'expiry': cookies.get('expiry')
    };
    console.log('in query post ',headers);
+   console.log('this.query_topic = ', this.state.query_topic);
     axios
       .post('/topics', {
-        name: this.query,
+        name: this.state.query_topic,
         user_id: this.props.user_id,
       }, {headers: headers})
       .then(res => {
@@ -177,7 +186,6 @@ class SearchUnit extends Component {
               </select>
             </label>
               <input className='submit' type="submit" value="SUBMIT" />
-            }
           </form>
           {this.button()}
           <p>{this.state.articles.slice(0,this.state.more_articles ? 10 : 3)}</p>

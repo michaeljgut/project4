@@ -39,12 +39,12 @@ class App extends Component {
         <h2>NY Times Article Search Application</h2>
         <Nav user_id={this.props.match.params.user_id}/>
         <div className="search1">
-          <SearchUnit user_id={this.props.match.params.user_id}/>
-          <SearchUnit user_id={this.props.match.params.user_id}/>
+          <SearchUnit user_id={this.props.match.params.user_id} unit_no="1" />
+          <SearchUnit user_id={this.props.match.params.user_id} unit_no="2" />
         </div>
         <div className="search2">
-          <SearchUnit user_id={this.props.match.params.user_id}/>
-          <SearchUnit user_id={this.props.match.params.user_id}/>
+          <SearchUnit user_id={this.props.match.params.user_id} unit_no="3" />
+          <SearchUnit user_id={this.props.match.params.user_id} unit_no="4" />
         </div>
         {this.searchUnits()}
         <button onClick={this.addSearchUnit}>Add Another Search Unit</button>
