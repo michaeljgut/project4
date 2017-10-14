@@ -29,6 +29,7 @@ export default (
             <Route exact path='/logout' component={Login} />
             <Route exact path='/register' component={Register} />
             <Route exact path='/saved_articles/:user_id' component={SavedArticles} />
+            <Route exact path='/topics/edit' component={EditTopics} />
         </div>
     </BrowserRouter>
 )

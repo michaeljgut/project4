@@ -47,6 +47,7 @@ class Login extends Component {
        cookies.set('token-type', res.headers["token-type"]);
        cookies.set('uid', res.headers["uid"]);
        cookies.set('expiry', res.headers["expiry"]);
+       cookies.set('user_id', res.data.data.id);
       this.setState({
           user_id: res.data.data.id,
           fireRedirect: true,

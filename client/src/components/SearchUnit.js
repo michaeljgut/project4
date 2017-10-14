@@ -11,6 +11,7 @@ class SearchUnit extends Component {
       query: '',
       topic: 'home',
       query_topic: 'home',
+      query_type: 2,
       articles_loaded: false,
       articles: [],
       more_articles: false,
@@ -38,7 +39,26 @@ class SearchUnit extends Component {
     this.getAPIData();
   }
 
+  componentWillMount() {
+    if (this.props.topic) {
+      if (this.props.topic.query_type === 1)
+        this.setState({query: this.props.topic.name});
+      else if (this.props.topic.query_type === 2)
+        this.setState({topic: this.props.topic.name});
+    }
+  }
+
   componentDidMount() {
+    console.log('this.props.topic = ',this.props.topic);
+    if (this.props.topic) {
+      if (this.props.topic.query_type === 1)
+        this.setState({query: this.props.topic.name});
+      else
+        this.setState({topic: this.props.topic.name});
+      console.log('this.state.query = ',this.state.query);
+      console.log('this.state.topic = ',this.state.topic);
+      this.getAPIData();
+    }
     let savedArticles = cookies.get(`saved-articles-${this.props.unit_no}`);
     console.log(`saved-articles-${this.props.unit_no}`)
     if (typeof(savedArticles) != 'undefined') {
@@ -54,11 +74,13 @@ class SearchUnit extends Component {
     if (this.state.query === '') {
       getQuery = 'http://api.nytimes.com/svc/topstories/v2/' +
         this.state.topic + '.json?' + apiKey;
-        this.setState({query_topic: this.state.topic});
+        this.setState({query_topic: this.state.topic,
+                       query_type: 2});
     } else {
       getQuery = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?q=' + this.state.query +
         '&' + apiKey;
-        this.setState({query_topic: this.state.query});
+        this.setState({query_topic: this.state.query,
+                       query_type: 1});
     }
     console.log('getQuery = ', getQuery);
     // let proxyUrl = 'https://cors-anywhere.herokuapp.com/';
@@ -117,6 +139,7 @@ class SearchUnit extends Component {
     axios
       .post('/topics', {
         name: this.state.query_topic,
+        type: this.state.query_type,
         user_id: this.props.user_id,
       }, {headers: headers})
       .then(res => {

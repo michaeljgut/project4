@@ -7,7 +7,8 @@ class TopicsController < ApplicationController
     if @topic
     else
       @topic = Topic.create(
-          name: params[:name]
+          name: params[:name],
+          query_type: params[:type]
       )
     end
     @users_topic = UsersTopic.create(
@@ -28,8 +29,10 @@ class TopicsController < ApplicationController
   def index
     puts 'user id = ', current_user
     puts 'user id = ', params[:user_id]
-    @articles = Article.where(user_id: params[:user_id])
-      render json: @topics
+    query = 'INNER JOIN users_topics ON users_topics.topic_id = topics.id
+      WHERE users_topics.user_id = ' + params[:user_id]
+    @topics = Topic.joins(query)
+    render json: @topics
   end
 
   def destroy

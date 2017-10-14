@@ -2,16 +2,50 @@ import React, { Component } from 'react';
 import './App.css';
 import SearchUnit from './components/SearchUnit';
 import Nav from './components/Nav';
+import axios from 'axios';
+import cookies from 'cookies-js';
+
 class App extends Component {
 
   constructor() {
     super();
     this.state = {
-      searchUnitCount: 0
+      topics: [],
+      searchUnitCount: 0,
+      dataLoaded: false
     }
     this.addSearchUnit = this.addSearchUnit.bind(this);
     this.removeSearchUnit = this.removeSearchUnit.bind(this);
   }
+
+  componentWillMount() {
+   let headers = {
+     'access-token': cookies.get('access-token'),
+     'client': cookies.get('client'),
+     'token-type': cookies.get('token-type'),
+     'uid': cookies.get('uid'),
+     'expiry': cookies.get('expiry')
+   };
+   console.log('headers = *',headers);
+    let path = `/topics?user_id=${cookies.get('user_id')}`;
+    axios
+      .get(path,
+     { headers: headers })
+//        user_id: this.props.match.params.user_id,
+      .then(res => {
+        console.log('--------------->', res)
+        let tempArray = res.data.slice();
+        console.log(tempArray[0]);
+        console.log(tempArray[1]);
+        this.setState({topics: tempArray,
+                       dataLoaded: true});
+        // this.setState({
+        //   newId: res.data.data.id,
+        //   fireRedirect: true
+        // });
+      })
+      .catch(err => console.log('in error',err));
+}
 
   addSearchUnit() {
     this.setState(prevState => ({
@@ -34,23 +68,34 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <div className="App">
-        <h2>NY Times Article Search Application</h2>
-        <Nav user_id={this.props.match.params.user_id}/>
-        <div className="search1">
-          <SearchUnit user_id={this.props.match.params.user_id} unit_no="1" />
-          <SearchUnit user_id={this.props.match.params.user_id} unit_no="2" />
+    console.log('in render');
+    if(!this.state.dataLoaded) {
+      return (
+        <div>
+          <h2>NY Times Article Search Application</h2>
+          <Nav user_id={this.props.match.params.user_id}/>
+          <h3>Data Is Loading...</h3>
         </div>
-        <div className="search2">
-          <SearchUnit user_id={this.props.match.params.user_id} unit_no="3" />
-          <SearchUnit user_id={this.props.match.params.user_id} unit_no="4" />
+        );
+    } else {
+      return (
+        <div className="App">
+          <h2>NY Times Article Search Application</h2>
+          <Nav user_id={this.props.match.params.user_id}/>
+          <div className="search1">
+            <SearchUnit user_id={this.props.match.params.user_id} unit_no="1" topic={this.state.topics[0]} />
+            <SearchUnit user_id={this.props.match.params.user_id} unit_no="2" topic={this.state.topics[1]} />
+          </div>
+          <div className="search2">
+            <SearchUnit user_id={this.props.match.params.user_id} unit_no="3" topic={this.state.topics[2]} />
+            <SearchUnit user_id={this.props.match.params.user_id} unit_no="4" topic={this.state.topics[3]} />
+          </div>
+          {this.searchUnits()}
+          <button onClick={this.addSearchUnit}>Add Another Search Unit</button>
+          <button onClick={this.removeSearchUnit}>Remove A Search Unit</button>
         </div>
-        {this.searchUnits()}
-        <button onClick={this.addSearchUnit}>Add Another Search Unit</button>
-        <button onClick={this.removeSearchUnit}>Remove A Search Unit</button>
-      </div>
-    );
+      );
+    }
   }
 }
 
