@@ -4,10 +4,6 @@ import App from '../App';
 import Flexbox from 'flexbox-react';
 import cookies from 'cookies-js';
 import axios from 'axios';
-//import Logout from './Logout.js'
-
-
-// var
 
 class Nav extends React.Component {
   constructor() {
@@ -29,7 +25,6 @@ class Nav extends React.Component {
     axios
       .delete(path,
      { headers: headers })
-//        user_id: this.props.match.params.user_id,
       .then(res => {
         console.log('--------------->', res)
        cookies.set('user_id', 0);
@@ -37,23 +32,12 @@ class Nav extends React.Component {
     this.setState({
       logout: true
     });
-        // this.setState({
-        //   newId: res.data.data.id,
-        //   fireRedirect: true
-        // });
       })
       .catch(err => console.log('in error',err));
 
   }
 
   render() {
-    // var shown = {
-    //   display: this.state.shown ? "block" : "none"
-    // };
-
-    // var hidden = {
-    //   display: this.state.shown ? "none" : "block"
-    // }
 
     let path = '';
     if (Number(this.props.user_id) > 0 && !this.state.logout) {
@@ -70,7 +54,7 @@ class Nav extends React.Component {
       content = (
         <div className='nav-line'>
           <a href = {path} className='nav-link2'>Home</a>
-          <button onClick={this.handleClick} className='logout'>Logout</button>
+          <a href = "#" onClick={this.handleClick} className='logout'>Logout</a>
           <a href = '/register' className='nav-link2'>Register</a>
           <a href = {savedPath} className='nav-link2'>Saved Articles</a>
           <a href = {editPath} className='nav-link2'>Edit Topics</a>

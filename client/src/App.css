@@ -2,10 +2,6 @@
   text-align: center;
 }
 
-.buttons {
-/*  margin 0 auto;
-*/}
-
 .article {
   padding: .5em;
   list-style: none;
@@ -19,6 +15,11 @@
   max-width: 35em;
 }
 
+.nav-line a {
+  color: black;
+  font-weight: 300;
+}
+
 .nav-link2 {
   padding-left: 1em;
   padding-right: 1em;
@@ -30,24 +31,6 @@
 .edit-topics-header {
   text-align: center;
 }
-
-/******************************************
-/* HELPER CLASSES
-/*******************************************/
-/* Clearfix */
-.clearfix:before,
-.clearfix:after {
-  content: " ";
-  display: table; }
-
-.clearfix:after {
-  clear: both; }
-
-.is-hidden {
-  display: none; }
-
-.is-visible {
-  display: block; }
 
 .auth-header {
   text-align: center;
@@ -97,6 +80,10 @@
 
 .search4 {
   float: right;
+}
+
+.logout {
+  text-decoration: underline;
 }
 
 @media (max-width: 500px) {

@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
-// import Auth from 'j-toker';
-//var Auth = require('j-toker');
-// Auth.configure({apiUrl: 'http://localhost:3000/'});
 import Auth from 'j-toker';
 import Nav from './Nav';
 

@@ -4,7 +4,6 @@ import axios from 'axios';
 import Auth from 'j-toker'
 import Nav from './Nav';
 import cookies from 'cookies-js';
-//var Auth = require('j-toker');
 Auth.configure({apiUrl: '/'});
 
 class Login extends Component {
@@ -40,7 +39,6 @@ class Login extends Component {
     })
     .then(res => {
       console.log('res.headers = ',res.headers);
-//      console.log('res.data.data = ',res.data.data);
        //setting cookies here
        cookies.set('access-token', res.headers["access-token"]);
        cookies.set('client', res.headers["client"]);

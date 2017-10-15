@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
-// import Auth from 'j-toker';
-//var Auth = require('j-toker');
-// Auth.configure({apiUrl: 'http://localhost:3000/'});
 import Auth from 'j-toker';
 import Nav from './Nav';
 import cookies from 'cookies-js';
@@ -34,16 +31,11 @@ class SavedArticles extends Component {
     axios
       .get(path,
      { headers: headers })
-//        user_id: this.props.match.params.user_id,
       .then(res => {
         console.log('--------------->', this.state)
         let tempArray = res.data.slice();
         console.log(tempArray[0]);
         this.setState({articles: tempArray});
-        // this.setState({
-        //   newId: res.data.data.id,
-        //   fireRedirect: true
-        // });
       })
       .catch(err => console.log('in error',err));
   }
