@@ -62,8 +62,11 @@ class App extends Component {
 
   searchUnits() {
     let returnArray = [];
-    for (let i=0; i<this.state.searchUnitCount; i++)
-      returnArray[i] = (<div><SearchUnit user_id={this.props.match.params.user_id}/></div>);
+    let searchi = '';
+    for (let i=0; i<this.state.searchUnitCount; i++){
+      searchi = 'search' + (i+3);
+      returnArray[i] = (<div className={searchi}><SearchUnit user_id={this.props.match.params.user_id}/></div>);
+    }
     return returnArray;
   }
 
@@ -91,8 +94,10 @@ class App extends Component {
             <SearchUnit user_id={this.props.match.params.user_id} unit_no="4" topic={this.state.topics[3]} />
           </div>
           {this.searchUnits()}
-          <button onClick={this.addSearchUnit}>Add Another Search Unit</button>
-          <button onClick={this.removeSearchUnit}>Remove A Search Unit</button>
+          <div className="buttons">
+            <button onClick={this.addSearchUnit}>Add Another Search Unit</button>
+            <button onClick={this.removeSearchUnit}>Remove A Search Unit</button>
+          </div>
         </div>
       );
     }

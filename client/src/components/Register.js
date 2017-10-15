@@ -114,20 +114,23 @@ class Register extends Component {
     let path = '/search/user/' + this.state.user_id;
     return (
       <div className="auth-page">
-          <h2 className="auth-header">Register to save articles!</h2>
-          <Nav user_id={this.props.match.params.user_id}/>
-          <h2></h2>
-          <form onSubmit={(e) => this.handleFormSubmit(e)}>
+        <h2 className="auth-header">Register to save articles!</h2>
+        <Nav user_id={this.props.match.params.user_id}/>
+        <br />
+        <div className="register-block">
+          <div className="register-form-block">
+            <form onSubmit={(e) => this.handleFormSubmit(e)}>
               <input name="name" type="text" placeholder="Name" required autoFocus onChange={this.handleInputChange}/>
               <input name="email" type="text" placeholder="Email" required onChange={this.handleInputChange}/>
               <input name="password" type="password" placeholder="Password" required onChange={this.handleInputChange}/>
               <input name="passwordConfirmation" type="password" placeholder="Password Confirmation" required onChange={this.handleInputChange}/>
               <input className='submit' type="submit" value="SIGN UP" />
-          </form>
-          <a className="link" href="/login">Login</a>
-          {this.state.fireRedirect
-              ? <Redirect push to={path} />
-              : ''}
+            </form>
+          </div>
+        </div>
+        {this.state.fireRedirect
+          ? <Redirect push to={path} />
+          : ''}
       </div>
     )
   }

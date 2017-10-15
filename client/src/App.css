@@ -2,15 +2,23 @@
   text-align: center;
 }
 
+.buttons {
+/*  margin 0 auto;
+*/}
+
 .search1 {
-  padding-left:0em;
-  width: 500;
   float: left;
 }
 
 .search2 {
-  padding-right: 0em;
-  width: 500;
+  float: right;
+}
+
+.search3 {
+  float: left;
+}
+
+.search4 {
   float: right;
 }
 
@@ -133,3 +141,41 @@ div.nav-list a:hover:before, div.nav-list a:hover:after{
 
 .is-visible {
   display: block; }
+
+.auth-header {
+  text-align: center;
+}
+
+.auth-page {
+  text-align: center;
+}
+
+.register-block {
+  width: 22em;
+  height: 15em;
+  background-color: cyan;
+  margin: 0 auto;
+}
+
+.register-block form {
+  margin: 0 auto;
+}
+
+.register-form-block {
+  position: relative;
+  margin: 0 auto;
+}
+
+.auth-page input {
+  font-size: 2em;
+}
+
+@media (max-width: 20px) {
+  .search1, .search2, .search3, .search4 {
+    float: none;
+  }
+
+  .App {
+    text-align: left;
+  }
+}
