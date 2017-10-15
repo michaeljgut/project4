@@ -50,12 +50,11 @@ class QueryArticles extends Component {
         // });
       })
       .catch(err => console.log(err));
-//    e.target.reset();
   }
 
   render(){
     return (
-      <div className="auth-page">
+      <div className="query-page">
         <li className="article" key={this.props.article.pub_date}>
           <a href={this.props.article.web_url}>{this.props.article.headline.main}</a>
           <span> - {this.props.article.pub_date.substr(0,10)}</span>

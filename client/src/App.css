@@ -7,15 +7,15 @@
   list-style: none;
 }
 
-.more-articles-icon {
+/*.more-articles-icon {
   font-size: 1em;
 }
-
-.search-unit {
-  max-width: 35em;
+*/
+/*.search-unit {
+  max-width: 40em;
 }
 
-.nav-line a {
+*/.nav-line a {
   color: black;
   font-weight: 300;
 }
@@ -28,6 +28,12 @@
   font-weight: 100;
 }
 
+.saved-item li {
+  font-size: 1.25em;
+  margin: 5px 0;
+  list-style: none;
+}
+
 .edit-topics-header {
   text-align: center;
 }
@@ -37,6 +43,7 @@
 }
 
 .auth-page {
+  font-size: 1.25em;
   margin: 0, auto;
   text-align: center;
 }

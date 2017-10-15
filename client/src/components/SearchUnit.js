@@ -153,13 +153,8 @@ class SearchUnit extends Component {
       .then(res => {
         console.log('--------------->', this.state)
         console.log(res);
-        // this.setState({
-        //   newId: res.data.data.id,
-        //   fireRedirect: true
-        // });
       })
       .catch(err => console.log(err));
-//    e.target.reset();
   }
 
   autoFocus() {

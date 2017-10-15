@@ -54,7 +54,8 @@ class Register extends Component {
     .then(res => {
       console.log(res)
       this.setState({
-        user_id: res.data.data.id
+        user_id: res.data.data.id,
+        fireRedirect: true
       })
     })
     .catch(err => console.log(err));

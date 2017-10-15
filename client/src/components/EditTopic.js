@@ -2,25 +2,27 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import Nav from './Nav';
+import cookies from 'cookies-js';
 
 
-class TopicEditForm extends Component {
+class EditTopic extends Component {
   constructor() {
     super();
     this.state = {
         newId: 0,
-        name: this.props.match.params.topic,
+        name: '',
         definition: '',
         date_modified: new Date(),
         fireRedirect: false,
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.deleteTopic = this.deleteTopic.bind(this);
     this.cancelTopic = this.cancelTopic.bind(this);
   }
 
   componentDidMount() {
+    console.log('name = ',this.props.match.params.name,)
+    this.setState({name: this.props.match.params.name})
   }
 
   handleInputChange(e) {
@@ -30,16 +32,24 @@ class TopicEditForm extends Component {
     const name = e.target.name;
     const value = e.target.value;
     this.setState({
-      definition: e.target.value,
+      name: e.target.value,
     });
   }
 
   handleFormSubmit(e) {
     e.preventDefault();
+     let headers = {
+       'access-token': cookies.get('access-token'),
+       'client': cookies.get('client'),
+       'token-type': cookies.get('token-type'),
+       'uid': cookies.get('uid'),
+       'expiry': cookies.get('expiry')
+     };
+     console.log('headers = ',headers)
     axios
       .put(`/topics/${this.props.match.params.topic_id}`, {
         name: this.state.name,
-      })
+      }, { headers: headers })
       .then(res => {
         this.setState({
           fireRedirect: true,
@@ -49,24 +59,25 @@ class TopicEditForm extends Component {
     e.target.reset();
   }
 
-  cancelFlashcard() {
+  cancelTopic() {
     this.setState({
       fireRedirect: true
    });
   }
 
   render() {
-    let path = `/topics/edit/{this.props.match.params.user_id}`
+    let path = `/topics/edit/${this.props.match.params.user_id}`
     console.log('path in topiceditform = ',path);
     return (
       <div className="edit">
         <form onSubmit={this.handleFormSubmit}>
             <input className='term-placeholder'
               type="text"
-              placeholder="term"
-              name="term"
+              placeholder="topic"
+              name="name"
               value={this.state.name}
               onChange={this.handleInputChange}
+              autoFocus
             />
           <input className='submit' type="submit" value="SUBMIT" />
         </form>
@@ -80,4 +91,4 @@ class TopicEditForm extends Component {
   }
 }
 
-export default TopicEditForm;
+export default EditTopic;

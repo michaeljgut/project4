@@ -31,7 +31,6 @@ class App extends Component {
     axios
       .get(path,
      { headers: headers })
-//        user_id: this.props.match.params.user_id,
       .then(res => {
         console.log('--------------->', res)
         let tempArray = res.data.slice();

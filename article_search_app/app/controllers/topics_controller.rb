@@ -31,12 +31,28 @@ class TopicsController < ApplicationController
     puts 'user id = ', params[:user_id]
     query = 'INNER JOIN users_topics ON users_topics.topic_id = topics.id
       WHERE users_topics.user_id = ' + params[:user_id]
+    puts 'query = ', query
     @topics = Topic.joins(query)
     render json: @topics
+  end
+
+  def update
+    @topic = Topic.find(params[:id])
+    if @topic.update(topic_params)
+      puts "OK"
+      render json: @topic
+    else
+      raise "Error!"
+    end
   end
 
   def destroy
     Topic.destroy(params[:id])
     # render json: Article.all
   end
+
+  def topic_params
+    params.permit(:name)
+  end
+
 end

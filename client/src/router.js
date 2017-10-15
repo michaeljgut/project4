@@ -32,7 +32,7 @@ export default (
             <Route exact path='/register' component={Register} />
             <Route exact path='/saved_articles/:user_id' component={SavedArticles} />
             <Route exact path='/topics/edit/:user_id' component={EditTopics} />
-            <Route exact path='/edit/:topic_id/:topic' component={EditTopic} />
+            <Route exact path='/edit/:topic_id/topic/:name' component={EditTopic} />
         </div>
     </BrowserRouter>
 )

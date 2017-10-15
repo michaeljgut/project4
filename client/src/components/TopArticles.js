@@ -33,24 +33,6 @@ class TopArticles extends Component {
      'uid': cookies.get('uid'),
      'expiry': cookies.get('expiry')
    };
-//    console.log('headers = ',headers)
-//     let path = `/articles?user_id=${this.props.match.params.user_id}`;
-//     axios
-//       .get(path,
-//      { headers: headers })
-// //        user_id: this.props.match.params.user_id,
-//       .then(res => {
-//         console.log('--------------->', this.state)
-//         let tempArray = res.data.slice();
-//         console.log(tempArray[0]);
-//         this.setState({articles: tempArray});
-//         // this.setState({
-//         //   newId: res.data.data.id,
-//         //   fireRedirect: true
-//         // });
-//       })
-//       .catch(err => console.log('in error',err));
-//   }
 
     axios
       .post('/articles', {
@@ -69,12 +51,11 @@ class TopArticles extends Component {
         // });
       })
       .catch(err => console.log(err));
-//    e.target.reset();
   }
 
   render(){
     return (
-      <div className="auth-page">
+      <div className="search-page">
         <li className="article" key={this.props.article.published_date}>
           <a href={this.props.article.url}>{this.props.article.title}</a>
           <span> - {this.props.article.published_date.substr(0,10)}</span>

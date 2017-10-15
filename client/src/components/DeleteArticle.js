@@ -30,25 +30,19 @@ class DeleteArticle extends Component {
        'expiry': cookies.get('expiry')
      };
     axios
-//      .delete(`/articles?id=${this.props.item.id}/${this.props.item.id}`,      { headers: headers })
       .delete(`/articles/${this.props.item.id}`,      { headers: headers })
       .then(res => {
         console.log('--------------->', this.state)
         console.log(res);
-        // this.setState({
-        //   newId: res.data.data.id,
-        //   fireRedirect: true
-        // });
         this.props.deleteOnClick();
       })
       .catch(err => console.log(err));
-//    e.target.reset();
   }
 
 
   render(){
     return (
-      <div className="auth-page">
+      <div className="saved-item">
         <li><a href={this.props.item.url}>{this.props.item.title}</a>- {this.props.item.publication_date}{this.button()}</li>
       </div>
     )

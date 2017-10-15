@@ -30,7 +30,6 @@ componentDidMount() {
     axios
       .get(path,
      { headers: headers })
-//        user_id: this.props.match.params.user_id,
       .then(res => {
         console.log('--------------->', res)
         let tempArray = res.data.slice();
@@ -52,7 +51,7 @@ componentDidMount() {
       if (topic.query_type === 1) {
         return (
               <p>
-                <Link to={`/edit/${topic.id}/${topic.name}`}>{topic.name}</Link>
+                <Link to={`/edit/${topic.id}/topic/${topic.name}`}>{topic.name}</Link>
                 <button onClick={this.deleteTopic(topic.id)}>Delete</button>
               </p>
         )
