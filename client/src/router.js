@@ -7,6 +7,8 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Login from './components/Login.js'
 import Register from './components/Register.js'
 import SavedArticles from './components/SavedArticles.js'
+import EditTopics from './components/EditTopics.js'
+import EditTopic from './components/EditTopic.js'
 /*// import Logout from './components/Logout.js'
 
 // import FlashcardAddForm from './components/FlashcardAddForm.js'
@@ -29,7 +31,8 @@ export default (
             <Route exact path='/logout' component={Login} />
             <Route exact path='/register' component={Register} />
             <Route exact path='/saved_articles/:user_id' component={SavedArticles} />
-            <Route exact path='/topics/edit' component={EditTopics} />
+            <Route exact path='/topics/edit/:user_id' component={EditTopics} />
+            <Route exact path='/edit/:topic_id/:topic' component={EditTopic} />
         </div>
     </BrowserRouter>
 )

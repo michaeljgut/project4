@@ -112,6 +112,10 @@ div.nav-list a:hover:before, div.nav-list a:hover:after{
   text-align: left;
 }
 
+.edit-topics-header {
+  text-align: center;
+}
+
 /******************************************
 /* HELPER CLASSES
 /*******************************************/

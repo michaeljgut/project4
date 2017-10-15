@@ -1,34 +1,26 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import Nav from './Nav';
 
 
-class FlashcardEditForm extends Component {
+class TopicEditForm extends Component {
   constructor() {
     super();
     this.state = {
         newId: 0,
-        term: '',
+        name: this.props.match.params.topic,
         definition: '',
         date_modified: new Date(),
         fireRedirect: false,
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.deleteFlashcard = this.deleteFlashcard.bind(this);
-    this.cancelFlashcard = this.cancelFlashcard.bind(this);
+    this.deleteTopic = this.deleteTopic.bind(this);
+    this.cancelTopic = this.cancelTopic.bind(this);
   }
 
   componentDidMount() {
-    axios.get(`/flashcard/${this.props.match.params.id}`)
-      .then((res) => {
-        const flashcard = res.data;
-        this.setState({
-          newId: flashcard.data.id,
-          term: flashcard.data.term,
-          definition: flashcard.data.definition
-        })
-      }).catch(err => console.log(err));
   }
 
   handleInputChange(e) {
@@ -45,33 +37,16 @@ class FlashcardEditForm extends Component {
   handleFormSubmit(e) {
     e.preventDefault();
     axios
-      .put(`/flashcard/${this.props.match.params.id}`, {
-        term: this.state.term,
-        definition: this.state.definition,
-        date_modified: this.state.date_modified
+      .put(`/topics/${this.props.match.params.topic_id}`, {
+        name: this.state.name,
       })
       .then(res => {
         this.setState({
-          newId: res.data.id,
           fireRedirect: true,
         });
       })
       .catch(err => console.log(err));
     e.target.reset();
-  }
-
-  deleteFlashcard() {
-    axios
-      .delete(`/flashcard/${this.state.newId}`)
-      .then(res => {
-        this.setState({
-          term: '',
-          definition: '',
-          fireRedirect: true,
-        });
-      })
-      .catch(err => console.log(err));
-
   }
 
   cancelFlashcard() {
@@ -81,8 +56,8 @@ class FlashcardEditForm extends Component {
   }
 
   render() {
-    let path = '/subjects/' + this.props.match.params.subject_id + '/user/' + this.props.match.params.user_id
-    console.log('path in flashcardeditform = ',path);
+    let path = `/topics/edit/{this.props.match.params.user_id}`
+    console.log('path in topiceditform = ',path);
     return (
       <div className="edit">
         <form onSubmit={this.handleFormSubmit}>
@@ -90,22 +65,13 @@ class FlashcardEditForm extends Component {
               type="text"
               placeholder="term"
               name="term"
-              value={this.state.term}
+              value={this.state.name}
               onChange={this.handleInputChange}
             />
-          <label>
-            Definition
-            <textarea id="comment" name="definition" cols="40" rows="15"
-              placeholder="Definition"
-              value={this.state.definition}
-              onChange={this.handleInputChange}
-              autoFocus>
-            </textarea>
-          </label>
           <input className='submit' type="submit" value="SUBMIT" />
         </form>
-        <button onClick={this.deleteFlashcard}>DELETE</button>
-        <button onClick={this.cancelFlashcard}>CANCEL</button>
+        <button onClick={this.deleteTopic}>DELETE</button>
+        <button onClick={this.cancelTopic}>CANCEL</button>
         {this.state.fireRedirect
           ? <Redirect push to={path} />
           : ''}
@@ -114,4 +80,4 @@ class FlashcardEditForm extends Component {
   }
 }
 
-export default FlashcardEditForm;
+export default TopicEditForm;

@@ -32,6 +32,7 @@ class Nav extends React.Component {
 
     let path = '/search/user/' + this.props.user_id;
     let savedPath = '/saved_articles/' + this.props.user_id;
+    let editPath = '/topics/edit/' + this.props.user_id;
 
     let content = '';
     if (Number(this.props.user_id) > 0)
@@ -41,6 +42,7 @@ class Nav extends React.Component {
         <a href = '/' className='nav-link2'>Logout</a>
         <a href = '/register' className='nav-link2'>Register</a>
         <a href = {savedPath} className='nav-link2'>Saved Articles</a>
+        <a href = {editPath} className='nav-link2'>Edit Topics</a>
         </div>
       )
     else
