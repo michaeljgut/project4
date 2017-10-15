@@ -6,22 +6,6 @@
 /*  margin 0 auto;
 */}
 
-.search1 {
-  float: left;
-}
-
-.search2 {
-  float: right;
-}
-
-.search3 {
-  float: left;
-}
-
-.search4 {
-  float: right;
-}
-
 .article {
   padding: .5em;
   list-style: none;
@@ -35,89 +19,12 @@
   max-width: 35em;
 }
 
-.hamburger-nav-icon{
-   width: 40px;
-   height: 2px;
-   background: #0F77FE;
-   margin: 1% 0;
-   display: block;
-}
-
-.nav-icon {
-  width: 80vw;
-  background:#0F77FE;
-  height: 50vh;
-  position: absolute;
-}
-
-.nav-list:after {
-  background-color: green;
-  width: 80vw;
-  transition: all 0.3s;
-
-
-}
-
-/* code source for nav animation: https://codepen.io/anon/pen/pWNZQz */
-
-div.nav-list a:before, div.nav-list a:after
-{
-    position: absolute;
-    opacity: 0;
-    font-size: 40px;
-    top: 0px;
-    transition: all 0.3s;
-}
-
-
-div.nav-list a:before
-{
-    content: '(';
-    left: -15px;
-    transform: translateX(20px);
-}
-
-div.nav-list a:after
-{
-    content: ')';
-    right: -15px;
-    transform: translateX(-40px);
-}
-
-div.nav-list a:hover:before, div.nav-list a:hover:after{
-    opacity: 1;
-    transform: translateX(0px);
-}
-
-.nav{
-  height: 52px;
-  border-left: 20px solid transparent;
-}
-
-
-.nav-link {
-  color: #FFF;
-  text-decoration: none;
-  font-family: 'Nunito', sans-serif;
-  font-size: 2em;
-  font-weight: 100;
-  margin: 0px 10px;
-  padding: 10px 10px;
-  position: relative;
-  z-index: 0;
-  cursor: pointer;
-}
-
 .nav-link2 {
   padding-left: 1em;
   padding-right: 1em;
   font-family: 'Nunito', sans-serif;
   font-size: 1em;
   font-weight: 100;
-}
-
-.nav-line {
-  text-align: left;
 }
 
 .edit-topics-header {
@@ -147,30 +54,52 @@ div.nav-list a:hover:before, div.nav-list a:hover:after{
 }
 
 .auth-page {
+  margin: 0, auto;
   text-align: center;
 }
 
-.register-block {
+.auth-page form {
+  width: 22em;
+  margin: 0, auto;
+}
+
+.auth-block label {
+  font-size: 1.5em;
+}
+
+.auth-block {
   width: 22em;
   height: 15em;
-  background-color: cyan;
-  margin: 0 auto;
-}
-
-.register-block form {
-  margin: 0 auto;
-}
-
-.register-form-block {
-  position: relative;
   margin: 0 auto;
 }
 
 .auth-page input {
-  font-size: 2em;
+  font-size: 1.5em;
+  width: 11em;
+  border: 5px solid cyan;
 }
 
-@media (max-width: 20px) {
+.submit {
+  margin: 0, auto;
+}
+
+.search1 {
+  float: left;
+}
+
+.search2 {
+  float: right;
+}
+
+.search3 {
+  float: left;
+}
+
+.search4 {
+  float: right;
+}
+
+@media (max-width: 500px) {
   .search1, .search2, .search3, .search4 {
     float: none;
   }

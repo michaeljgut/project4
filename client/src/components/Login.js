@@ -62,22 +62,25 @@ class Login extends Component {
     let path = '/search/user/' + this.state.user_id;
       console.log('path = ',path);
       return (
-          <div className="auth-page">
+        <div className="auth-page">
 
-              <h2 className="auth-header">Sign In To Save Articles!</h2>
-              <h2></h2>
-              <Nav user_id={this.props.match.params.user_id}/>
-              <br/>
-              <form onSubmit={(e) => this.handleFormSubmit(e)}>
-                  <input name="email" type="text" placeholder="email" required autoFocus onChange={this.handleInputChange}/>
-                  <input name="password" type="password" placeholder="password" required onChange={this.handleInputChange}/>
-                  <input className="submit" type="submit" value="LOGIN" />
-              </form>
-
-              {this.state.fireRedirect
-                  ? <Redirect push to={path} />
-                    : ''}
+          <h2 className="auth-header">Sign In To Save Articles!</h2>
+          <h2></h2>
+          <Nav user_id={this.props.match.params.user_id}/>
+          <br/>
+          <div className="auth-block">
+            <form onSubmit={(e) => this.handleFormSubmit(e)}>
+              <input name="email" type="text" placeholder="email" required autoFocus onChange={this.handleInputChange}/>
+              <br />
+              <input name="password" type="password" placeholder="password" required onChange={this.handleInputChange}/>
+              <input className="submit" type="submit" value="LOGIN" />
+            </form>
           </div>
+
+          {this.state.fireRedirect
+              ? <Redirect push to={path} />
+                : ''}
+        </div>
       )
   }
 }

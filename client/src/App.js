@@ -86,7 +86,7 @@ class App extends Component {
           <h2>NY Times Article Search Application</h2>
           <Nav user_id={this.props.match.params.user_id}/>
           <div className="search1">
-            <SearchUnit user_id={this.props.match.params.user_id} unit_no="1" topic={this.state.topics[0]} />
+            <SearchUnit autofocus={true} user_id={this.props.match.params.user_id} unit_no="1" topic={this.state.topics[0]} />
             <SearchUnit user_id={this.props.match.params.user_id} unit_no="2" topic={this.state.topics[1]} />
           </div>
           <div className="search2">
@@ -94,6 +94,7 @@ class App extends Component {
             <SearchUnit user_id={this.props.match.params.user_id} unit_no="4" topic={this.state.topics[3]} />
           </div>
           {this.searchUnits()}
+          <br />
           <div className="buttons">
             <button onClick={this.addSearchUnit}>Add Another Search Unit</button>
             <button onClick={this.removeSearchUnit}>Remove A Search Unit</button>

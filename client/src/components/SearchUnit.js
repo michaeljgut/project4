@@ -125,6 +125,14 @@ class SearchUnit extends Component {
       return '';
   }
 
+  saveButton() {
+    let user_id = cookies.get(`user_id`);
+    if (Number(user_id) > 0) {
+      return <button className='save-articles-icon' onClick={this.saveTopic}>Save Topic</button>;
+    } else
+    return '';
+  }
+
   saveTopic(e) {
     e.preventDefault();
    let headers = {
@@ -154,7 +162,26 @@ class SearchUnit extends Component {
 //    e.target.reset();
   }
 
+  autoFocus() {
+     if (this.props.autofocus)
+       return <input
+                type="text"
+                placeholder="Query"
+                name="query"
+                value={this.state.query}
+                onChange={this.handleChange}
+                autoFocus
+              />
+    else
+      return <input
+                type="text"
+                placeholder="Query"
+                name="query"
+                value={this.state.query}
+                onChange={this.handleChange}
+              />
 
+  }
 
 
   render() {
@@ -166,15 +193,8 @@ class SearchUnit extends Component {
             <label>
               Enter a query:
             </label>
-            <input
-              type="text"
-              placeholder="Query"
-              name="query"
-              value={this.state.query}
-              onChange={this.handleChange}
-              autoFocus
-            />
-            <button onClick={this.saveTopic} >Save Topic</button>
+            {this.autoFocus()}
+            {this.saveButton()}
             <br>
             </br>
             <label>
