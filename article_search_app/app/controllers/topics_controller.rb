@@ -1,5 +1,6 @@
 class TopicsController < ApplicationController
-  before_action :authenticate_user!, except: [ :index, :create, :show, :destroy]
+#  before_action :authenticate_user!, except: [ :index, :create, :show, :destroy]
+  before_action :authenticate_user!
   def create
     puts 'params = ', params
     @topic = Topic.find_by(name: params[:name])
@@ -8,6 +9,7 @@ class TopicsController < ApplicationController
     else
       @topic = Topic.create(
           name: params[:name],
+          user_id: params[:user_id],
           query_type: params[:type]
       )
     end
@@ -32,6 +34,8 @@ class TopicsController < ApplicationController
     query = 'INNER JOIN users_topics ON users_topics.topic_id = topics.id
       WHERE users_topics.user_id = ' + params[:user_id]
     puts 'query = ', query
+#    @topics = Topic.where(user_id: params[:user_id])
+#      render json: @topics
     @topics = Topic.joins(query)
     render json: @topics
   end

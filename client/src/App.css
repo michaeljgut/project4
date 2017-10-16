@@ -7,15 +7,12 @@
   list-style: none;
 }
 
-/*.more-articles-icon {
-  font-size: 1em;
-}
-*/
-/*.search-unit {
-  max-width: 40em;
+.edit {
+  text-align: center;
+  font-size: 3em;
 }
 
-*/.nav-line a {
+.nav-line a {
   color: black;
   font-weight: 300;
 }

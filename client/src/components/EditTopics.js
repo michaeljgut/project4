@@ -11,7 +11,6 @@ class EditTopics extends Component {
       this.state = {
         topics: [],
         headers: {},
-        searchUnitCount: 0,
         dataLoaded: false
       }
     }
@@ -37,10 +36,6 @@ componentDidMount() {
         console.log(tempArray[1]);
         this.setState({topics: tempArray,
                        dataLoaded: true});
-        // this.setState({
-        //   newId: res.data.data.id,
-        //   fireRedirect: true
-        // });
       })
       .catch(err => console.log('in error',err));
 }
@@ -48,30 +43,10 @@ componentDidMount() {
   topicsMap(array){
     return array.map((topic, index) => {
       console.log('topic = ',topic);
-      if (topic.query_type === 1) {
-        return (
-              <p>
-                <Link to={`/edit/${topic.id}/topic/${topic.name}`}>{topic.name}</Link>
-                <button onClick={this.deleteTopic(topic.id)}>Delete</button>
-              </p>
-        )
-      } else {
-        return (
-              <p>{topic.name}<button>Delete</button></p>
-        )
-      }
+        return <p>
+            <Link to={`/edit/${topic.id}/topic/${topic.name}/${topic.query_type}`}>{topic.name}</Link>
+          </p>
     })
-  }
-
-  deleteTopic(id) {
-    axios
-      .delete(`/topics/${id}`,
-           { headers: this.state.headers })
-      .then(res => {
-        this.render();
-      })
-      .catch(err => console.log(err));
-
   }
 
 

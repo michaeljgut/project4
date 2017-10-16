@@ -18,6 +18,7 @@ class EditTopic extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.cancelTopic = this.cancelTopic.bind(this);
+    this.deleteTopic = this.deleteTopic.bind(this);
   }
 
   componentDidMount() {
@@ -65,20 +66,40 @@ class EditTopic extends Component {
    });
   }
 
+  deleteTopic() {
+    let headers = {
+       'access-token': cookies.get('access-token'),
+       'client': cookies.get('client'),
+       'token-type': cookies.get('token-type'),
+       'uid': cookies.get('uid'),
+       'expiry': cookies.get('expiry')
+     };
+     console.log('headers = ',headers)
+    axios
+      .delete(`/topics/${this.props.match.params.topic_id}`,
+           { headers: this.state.headers })
+      .then(res => {
+        this.setState({
+          fireRedirect: true,
+        });
+      })
+      .catch(err => console.log(err));
+  }
+
   render() {
-    let path = `/topics/edit/${this.props.match.params.user_id}`
+    let path = `/topics/edit/${cookies.get('user_id')}`
     console.log('path in topiceditform = ',path);
     return (
       <div className="edit">
         <form onSubmit={this.handleFormSubmit}>
-            <input className='term-placeholder'
-              type="text"
-              placeholder="topic"
-              name="name"
-              value={this.state.name}
-              onChange={this.handleInputChange}
-              autoFocus
-            />
+          <input className='term-placeholder'
+            type="text"
+            placeholder="topic"
+            name="name"
+            value={this.state.name}
+            onChange={this.handleInputChange}
+            autoFocus
+          />
           <input className='submit' type="submit" value="SUBMIT" />
         </form>
         <button onClick={this.deleteTopic}>DELETE</button>

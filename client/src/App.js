@@ -60,10 +60,15 @@ class App extends Component {
   }
 
   searchUnits() {
+          // <div className="buttons">
+          //   <button onClick={this.addSearchUnit}>Add Another Search Unit</button>
+          //   <button onClick={this.removeSearchUnit}>Remove A Search Unit</button>
+          // </div>
     let returnArray = [];
     let searchi = '';
     for (let i=0; i<this.state.searchUnitCount; i++){
       searchi = 'search' + (i+3);
+      console.log('searchi = ', searchi);
       returnArray[i] = (<div className={searchi}><SearchUnit user_id={this.props.match.params.user_id}/></div>);
     }
     return returnArray;
@@ -94,10 +99,6 @@ class App extends Component {
           </div>
           {this.searchUnits()}
           <br />
-          <div className="buttons">
-            <button onClick={this.addSearchUnit}>Add Another Search Unit</button>
-            <button onClick={this.removeSearchUnit}>Remove A Search Unit</button>
-          </div>
         </div>
       );
     }

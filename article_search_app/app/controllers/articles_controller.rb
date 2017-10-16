@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
-  before_action :authenticate_user!, except: [ :index, :create, :show, :destroy]
+  before_action :authenticate_user!
+#  before_action :authenticate_user!, except: [ :index, :create, :show, :destroy]
   # def index
   #     @articles = Article.all()
   #     render json: @articles

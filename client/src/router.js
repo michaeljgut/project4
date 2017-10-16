@@ -1,25 +1,12 @@
 import React from 'react';
 import App from './App';
 import { BrowserRouter, Route } from 'react-router-dom';
-// import Subjects from './components/Subjects';
-// import Subject from './components/Subject'
 
 import Login from './components/Login.js'
 import Register from './components/Register.js'
 import SavedArticles from './components/SavedArticles.js'
 import EditTopics from './components/EditTopics.js'
 import EditTopic from './components/EditTopic.js'
-/*// import Logout from './components/Logout.js'
-
-// import FlashcardAddForm from './components/FlashcardAddForm.js'
-// import FlashcardEditForm from './components/FlashcardEditForm.js'
-
-// import HardOnes from './components/Hardones.js'
-
-// import SubjectAddForm from './components/SubjectAddForm.js'
-// import Header from './components/Header.js'
-
-*/
 export default (
     <BrowserRouter>
         <div className='router'>
@@ -32,7 +19,7 @@ export default (
             <Route exact path='/register' component={Register} />
             <Route exact path='/saved_articles/:user_id' component={SavedArticles} />
             <Route exact path='/topics/edit/:user_id' component={EditTopics} />
-            <Route exact path='/edit/:topic_id/topic/:name' component={EditTopic} />
+            <Route exact path='/edit/:topic_id/topic/:name/:query_type' component={EditTopic} />
         </div>
     </BrowserRouter>
 )
