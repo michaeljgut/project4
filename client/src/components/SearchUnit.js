@@ -15,6 +15,7 @@ class SearchUnit extends Component {
       articles_loaded: false,
       articles: [],
       more_articles: false,
+      query_loaded: false
     };
     // this.getAPIData = this.getAPIData.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -71,7 +72,7 @@ class SearchUnit extends Component {
     let apiKey = 'api-key=' + process.env.REACT_APP_ARTICLES_API_KEY
     let getQuery = '';
     let articleArray = [];
-    if (this.state.query === '') {
+    if (this.state.query === '' && this.state.query_loaded) {
       getQuery = 'http://api.nytimes.com/svc/topstories/v2/' +
         this.state.topic + '.json?' + apiKey;
         this.setState({query_topic: this.state.topic,
@@ -84,33 +85,40 @@ class SearchUnit extends Component {
     }
     console.log('getQuery = ', getQuery);
     // let proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    axios.get(getQuery)
-      .then(res => {
-        console.log('--------------->', this.state);
-        console.log('res = ',res);
-        console.log('this.props = ',this.props);
-        if (this.state.query === '') {
-          articleArray = res.data.results.map((item,index) => {
-            return <TopArticles article={item} user_id={this.props.user_id}/>;
+    let err_no = 429;
+    // while (err_no === 429) {
+      axios.get(getQuery)
+        .then(res => {
+          console.log('--------------->', this.state);
+          console.log('res = ',res);
+          console.log('this.props = ',this.props);
+          if (this.state.query === '') {
+            articleArray = res.data.results.map((item,index) => {
+              return <TopArticles article={item} user_id={this.props.user_id}/>;
+            });
+          } else {
+            let resultArray = res.data.response.docs.filter(item =>
+              item.document_type === 'article' || item.document_type === 'blogpost');
+            articleArray = resultArray.map((item,index) => {
+              return <QueryArticles article={item} user_id={this.props.user_id} />;
+            });
+            this.setState({query: ''});
+            console.log('resultArray = ',resultArray);
+          }
+          console.log(articleArray[0]);
+          cookies.set(`saved-articles-${this.props.unit_no}`, articleArray[0].title);
+          this.setState({
+            articles_loaded: true,
+            articles: articleArray,
+            displayArticles: true,
           });
-        } else {
-          let resultArray = res.data.response.docs.filter(item =>
-            item.document_type === 'article' || item.document_type === 'blogpost');
-          articleArray = resultArray.map((item,index) => {
-            return <QueryArticles article={item} user_id={this.props.user_id} />;
-          });
-          this.setState({query: ''});
-          console.log('resultArray = ',resultArray);
-        }
-        console.log(articleArray[0]);
-        cookies.set(`saved-articles-${this.props.unit_no}`, articleArray[0].title);
-        this.setState({
-          articles_loaded: true,
-          articles: articleArray,
-          displayArticles: true,
+          err_no = 0;
+        })
+        .catch(err => {
+          console.log(err);
+          err_no = err;
         });
-      })
-      .catch(err => console.log(err));
+    // }
   }
 
   button() {
@@ -158,8 +166,30 @@ class SearchUnit extends Component {
   }
 
   autoFocus() {
-     if (this.props.autofocus)
-       return <input
+    console.log('this.state.query = ',this.state.query);
+        if (this.props.topic && !this.state.query_loaded) {
+          if (this.props.topic.query_type === 1)
+            this.setState({query: this.props.topic.name,
+                          query_loaded: true});
+          else if (this.props.topic.query_type === 2)
+            this.setState({topic: this.props.topic.name,
+                          query_loaded: true});
+          if (this.state.query_loaded)
+            this.getAPIData();
+        }
+      if (this.props.autofocus) {
+        // if (this.props.topic && !this.state.query_loaded) {
+        //   if (this.props.topic.query_type === 1)
+        //     this.setState({query: this.props.topic.name,
+        //                   query_loaded: true});
+        //   else if (this.props.topic.query_type === 2)
+        //     this.setState({topic: this.props.topic.name,
+        //                   query_loaded: true});
+        //   if (this.state.query_loaded)
+        //     this.getAPIData();
+        // }
+
+        return <input
                 type="text"
                 placeholder="Query"
                 name="query"
@@ -167,8 +197,9 @@ class SearchUnit extends Component {
                 onChange={this.handleChange}
                 autoFocus
               />
-    else
-      return <input
+      }
+      else
+        return <input
                 type="text"
                 placeholder="Query"
                 name="query"

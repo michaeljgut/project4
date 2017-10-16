@@ -51,12 +51,17 @@ class TopicsController < ApplicationController
   end
 
   def destroy
+    # @topic = Topic.find(params[:id])
+    # if @topic.destroy(topic_params)
+    #   puts "OK"
+    # else
+    #   raise "Error!"
+    # end
     Topic.destroy(params[:id])
-    # render json: Article.all
   end
 
   def topic_params
-    params.permit(:name)
+    params.permit(:name, :id)
   end
 
 end

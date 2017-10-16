@@ -4,6 +4,7 @@ import SearchUnit from './components/SearchUnit';
 import Nav from './components/Nav';
 import axios from 'axios';
 import cookies from 'cookies-js';
+import nytimes_logo from './images/poweredby_nytimes_150a.png'
 
 class App extends Component {
 
@@ -28,6 +29,7 @@ class App extends Component {
    };
    console.log('headers = *',headers);
     let path = `/topics?user_id=${cookies.get('user_id')}`;
+    console.log('path = ',path);
     axios
       .get(path,
      { headers: headers })
@@ -74,18 +76,8 @@ class App extends Component {
     return returnArray;
   }
 
-  render() {
-    console.log('in render');
-    if(!this.state.dataLoaded) {
-      return (
-        <div>
-          <h2>NY Times Article Search Application</h2>
-          <Nav user_id={this.props.match.params.user_id}/>
-          <h3>Data Is Loading...</h3>
-        </div>
-        );
-    } else {
-      return (
+  renderApp() {
+    return (
         <div className="App">
           <h2>NY Times Article Search Application</h2>
           <Nav user_id={this.props.match.params.user_id}/>
@@ -100,8 +92,26 @@ class App extends Component {
           {this.searchUnits()}
           <br />
         </div>
+    )
+  }
+
+  render() {
+    console.log('in render', this.state.topics[0]);
+    // if(!this.state.dataLoaded) {
+    //   return (
+    //     <div>
+    //       <h2>NY Times Article Search Application</h2>
+    //       <Nav user_id={this.props.match.params.user_id}/>
+    //       <h3>Data Is Loading...</h3>
+    //     </div>
+    //     );
+    // } else {
+      return (
+        <div>
+          {this.renderApp()}
+        </div>
       );
-    }
+    // }
   }
 }
 
