@@ -13,3 +13,5 @@ Here's a link to my User Stories: https://drive.google.com/open?id=1Owo2Dzl2iHg-
 Here's a link to my presentation: https://drive.google.com/open?id=1gbRmkSwiODSivzpK3sVtt48tIO7K7FQ676SdSqICAAc
 
 Devise Token Auth was used for authentication but required that the header be handled in React. I tried using JToker to do this but was unable to get the configuration to work.
+
+In order to deploy this to Heroku I created 2 new repos, one for the React part, https://github.com/michaeljgut/project4_react, and one for the rails part, https://github.com/michaeljgut/project4_rails. Please see these 2 repos for changes made after 10/15/2017.
