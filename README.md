@@ -14,4 +14,4 @@ Here's a link to my presentation: https://drive.google.com/open?id=1gbRmkSwiODSi
 
 Devise Token Auth was used for authentication but required that the header be handled in React. I tried using JToker to do this but was unable to get the configuration to work. The directory article_search_app contains the Express code and the client directory contains the React code.
 
-In order to deploy this to Heroku I created 2 new repos, one for the React part, https://github.com/michaeljgut/project4_react, and one for the rails part, https://github.com/michaeljgut/project4_rails. Please see these 2 repos for changes made after 10/15/2017.
+In order to deploy this to Heroku I created 2 new repos, one for the React part, https://github.com/michaeljgut/project4_react, and one for the rails part, https://github.com/michaeljgut/project4_rails. Please see these 2 repos for the latest code and for all changes made after 10/15/2017.
