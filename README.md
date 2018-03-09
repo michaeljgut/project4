@@ -1,6 +1,6 @@
 # project4
 
-This project is a Web Application that let's users search the NY Times for articles based on keyword or section topic. A query could be an author or a person, country, etc. of interest. Topics are chosen from a list of categories that is supplied by the NY Times which roughly correspond to sections. Articles may be saved if the user logs in.
+This project is a Web Application that let's users search the New York Times for articles based on keyword or section topic. A query could be an author or a person, country, etc. of interest. Topics are chosen from a list of categories that is supplied by the NY Times which roughly correspond to sections. Articles may be saved.
 
 The application uses React for the front end and Rails for the backend. React was chosen for it's loading speed and Rails was chosen for it's speed.
 
